@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turn Every Purchase Into Points - Playful Rewards</title>
+  <meta name="description" content="Turn gaming into real rewards. Earn valuable rewards daily playing your favorite games.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23A855F7' width='100' height='100' rx='20'/><path fill='white' d='M30 40h40v20H30z M25 45v10l10-5z M75 45v10l-10-5z'/></svg>">
+  
+  <style>
+    /* All the CSS from the original file */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #A855F7;
+      --primary-dark: #9333EA;
+      --secondary: #10B981;
+      --accent: #F59E0B;
+      --dark: #0A0A0B;
+      --gray-950: #0b0b0d;
+      --gray-900: #18181B;
+      --gray-800: #27272A;
+      --gray-700: #3F3F46;
+      --gray-600: #52525B;
+      --gray-500: #71717A;
+      --gray-400: #A1A1AA;
+      --gray-300: #D4D4D8;
+      --gray-200: #E4E4E7;
+      --gray-100: #F4F4F5;
+      --gray-50: #FAFAFA;
+      --white: #FFFFFF;
+      --radius: 16px;
+      --radius-lg: 24px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.3);
+      --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.3);
+    }
+    
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--gray-100);
+      background: var(--dark);
+      min-height: 100svh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--primary);
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+      z-index: 100;
+      border-radius: var(--radius);
+    }
+    .skip-link:focus { top: 16px; left: 16px; }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 16px; }
+    }
+    header {
+      background: var(--gray-900);
+      border-bottom: 1px solid var(--gray-800);
+      padding: 16px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(24, 24, 27, 0.95);
+    }
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.025em;
+    }
+    .logo svg { width: 32px; height: 32px; }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    nav a {
+      color: var(--gray-300);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--primary);
+      color: white !important;
+      padding: 8px 20px;
+      border-radius: var(--radius);
+      font-weight: 700 !important;
+      transition: all 0.2s;
+    }
+    .nav-cta:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-lg);
+    }
+    .mobile-menu {
+      display: none;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+    }
+    .mobile-menu span {
+      width: 100%;
+      height: 2px;
+      background: var(--gray-700);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .mobile-menu { display: flex; }
+    }
+    h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      margin-bottom: 24px;
+      color: var(--white);
+    }
+    h2 {
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-bottom: 16px;
+      color: var(--white);
+    }
+    h3 {
+      font-size: clamp(20px, 3vw, 24px);
+      line-height: 1.3;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+    p {
+      color: var(--gray-300);
+      font-size: clamp(16px, 2vw, 18px);
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, var(--primary), #EC4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 32px;
+      min-height: 56px;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: var(--radius);
+      font-weight: 700;
+      font-size: 16px;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      box-shadow: var(--shadow);
+      gap: 8px;
+      letter-spacing: -0.01em;
+    }
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-xl);
+    }
+    .btn:active { transform: translateY(0); }
+    .btn-primary {
+      background: var(--dark);
+      color: white;
+      font-size: 18px;
+      font-weight: 800;
+      padding: 20px 40px;
+      min-height: 64px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .btn-primary:hover {
+      background: #000;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    }
+    @media (max-width: 768px) {
+      .btn-primary {
+        font-size: 20px;
+        padding: 24px 40px;
+        min-height: 72px;
+        width: 100%;
+      }
+    }
+    .btn-large { padding: 20px 40px; font-size: 18px; min-height: 64px; }
+    .btn-secondary {
+      background: var(--gray-100);
+      color: var(--gray-900);
+      font-weight: 800;
+    }
+    .btn-secondary:hover { background: var(--gray-200); }
+    @media (max-width: 640px) {
+      .btn { width: 100%; }
+    }
+    .card {
+      background: var(--gray-900);
+      border: 1px solid var(--gray-800);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: all 0.2s;
+    }
+    .card:hover {
+      box-shadow: var(--shadow-xl);
+      transform: translateY(-4px);
+      border-color: var(--gray-700);
+    }
+    .hero {
+      padding: 120px 0 80px;
+      background: linear-gradient(135deg, var(--dark) 0%, var(--gray-900) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    @media (max-width: 768px) {
+      .hero { padding: 80px 0 40px; }
+    }
+    .hero:before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+      opacity: 0.1;
+      top: -300px;
+      right: -200px;
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+    .hero-text h1 { margin-bottom: 24px; }
+    .hero-text p {
+      font-size: 20px;
+      color: var(--gray-300);
+      margin-bottom: 32px;
+    }
+    @media (max-width: 768px) {
+      .hero-text h1 {
+        font-size: 48px;
+        margin-bottom: 16px;
+      }
+    }
+    @media (max-width: 768px) {
+      .hero-text p {
+        font-size: 16px;
+        margin-bottom: 24px;
+      }
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    @media (max-width: 768px) {
+      .hero-buttons { flex-direction: column; }
+    }
+    .hero-visual { position: relative; }
+    .hero-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid var(--gray-200);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .points-display {
+      text-align: center;
+      padding: 32px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+    }
+    .points-display .points-value {
+      font-size: 48px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.02em;
+    }
+    .points-display .points-label {
+      color: rgba(255,255,255,0.9);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 8px;
+    }
+    .reward-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      background: var(--gray-50);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+    }
+    .reward-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .reward-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #fff;
+    }
+    .reward-details h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--dark);
+      margin: 0;
+    }
+    .reward-details p {
+      font-size: 12px;
+      color: var(--gray-700);
+      margin: 0;
+    }
+    .reward-points {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--secondary);
+    }
+    .trust-badges {
+      display: flex;
+      gap: 24px;
+      margin-top: 48px;
+      flex-wrap: wrap;
+    }
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gray-300);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .trust-badge svg {
+      width: 20px;
+      height: 20px;
+      color: var(--secondary);
+    }
+    .features {
+      padding: 80px 0;
+      background: var(--white);
+    }
+    .features-intro {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 60px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+    .feature-card {
+      padding: 32px;
+      text-align: center;
+      background: #fff;
+      border: 1px solid var(--gray-200);
+    }
+    .feature-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 24px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: #fff;
+    }
+    .brands {
+      padding: 80px 0;
+      background: var(--gray-50);
+    }
+    .brands-intro {
+      text-align: center;
+      margin-bottom: 60px;
+      color: var(--gray-900);
+    }
+    .brands-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 24px;
+    }
+    @media (max-width: 640px) {
+      .brands-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+    }
+    .brand-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      transition: all 0.2s;
+      cursor: pointer;
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: var(--gray-900);
+      font-weight: 700;
+    }
+    .brand-card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+    .brand-logo {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+    .brand-name {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--gray-900);
+      margin: 0;
+    }
+    .brand-cashback {
+      font-size: 12px;
+      color: var(--secondary);
+      font-weight: 800;
+      margin-top: 4px;
+    }
+    .testimonials {
+      padding: 80px 0;
+      background: var(--white);
+    }
+    .testimonials-intro {
+      text-align: center;
+      margin-bottom: 60px;
+      color: var(--gray-900);
+    }
+    .testimonials-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .testimonials-scroll::-webkit-scrollbar { display: none; }
+    .testimonials-track {
+      display: flex;
+      gap: 24px;
+      padding-bottom: 20px;
+    }
+    .testimonial-card {
+      flex: 0 0 auto;
+      width: 350px;
+      background: var(--gray-50);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      border: 1px solid var(--gray-200);
+      color: var(--gray-900);
+    }
+    @media (max-width: 640px) {
+      .testimonial-card { width: 85vw; }
+    }
+    .testimonial-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .testimonial-avatar {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .testimonial-info h4 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--dark);
+      margin: 0;
+    }
+    .testimonial-info p {
+      font-size: 14px;
+      color: var(--gray-600);
+      margin: 0;
+    }
+    .testimonial-rating {
+      color: var(--accent);
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+    .testimonial-text {
+      color: var(--gray-800);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+    .testimonial-reward {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--gray-200);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .testimonial-reward-label {
+      font-size: 13px;
+      color: var(--gray-600);
+    }
+    .testimonial-reward-value {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--secondary);
+    }
+    .cta {
+      padding: 100px 0;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+    }
+    .cta:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .cta-content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .cta h2 {
+      color: white;
+      margin-bottom: 20px;
+    }
+    .cta p {
+      color: rgba(255,255,255,0.95);
+      font-size: 20px;
+      margin-bottom: 32px;
+    }
+    .cta .btn {
+      background: white;
+      color: var(--primary);
+      font-size: 18px;
+      padding: 20px 48px;
+      font-weight: 800;
+    }
+    .cta .btn:hover {
+      background: var(--gray-50);
+      transform: translateY(-2px);
+    }
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 60px 0 30px;
+    }
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 768px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+    .footer-brand h3 {
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .footer-brand p {
+      color: var(--gray-400);
+      font-size: 15px;
+    }
+    .footer-section h4 {
+      color: white;
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-links a {
+      color: var(--gray-300);
+      text-decoration: none;
+      font-size: 15px;
+      transition: color 0.2s;
+      font-weight: 700;
+    }
+    .footer-links a:hover { color: white; }
+    .footer-bottom {
+      padding-top: 32px;
+      border-top: 1px solid var(--gray-800);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-bottom p {
+      color: var(--gray-400);
+      font-size: 14px;
+      margin: 0;
+    }
+    .social-links {
+      display: flex;
+      gap: 16px;
+    }
+    .social-links a {
+      width: 36px;
+      height: 36px;
+      background: var(--gray-800);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray-300);
+      text-decoration: none;
+      transition: all 0.2s;
+      font-weight: 800;
+    }
+    .social-links a:hover {
+      background: var(--primary);
+      color: white;
+    }
+    .form-group { margin-bottom: 24px; }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+      color: var(--gray-800);
+      font-size: 14px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--gray-300);
+      border-radius: var(--radius);
+      font-size: 16px;
+      transition: all 0.2s;
+      background: var(--white);
+      color: var(--gray-900);
+      font-weight: 600;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+      font-family: inherit;
+    }
+    .content-page {
+      padding: 120px 0 80px;
+      min-height: calc(100vh - 200px);
+      background: var(--white);
+      color: var(--gray-900);
+    }
+    .content-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .content-section {
+      margin-bottom: 48px;
+    }
+    .content-section h2 {
+      font-size: 28px;
+      margin-bottom: 16px;
+      color: var(--gray-900);
+    }
+    .content-section p {
+      margin-bottom: 16px;
+      line-height: 1.8;
+      color: var(--gray-800);
+    }
+    .content-section ul {
+      margin: 16px 0;
+      padding-left: 24px;
+    }
+    .content-section li {
+      margin-bottom: 8px;
+      color: var(--gray-800);
+      font-weight: 600;
+    }
+    @media (max-width: 768px) {
+      body { background: var(--white); color: var(--gray-900); }
+      header { background: var(--white); border-bottom: 1px solid var(--gray-200); }
+      .logo { color: var(--dark); }
+      .hero {
+        padding: 80px 0 40px;
+        background: white;
+        min-height: 100vh;
+        display: flex;
+        align-items: flex-start;
+        padding-top: 100px;
+      }
+      .hero-text {
+        text-align: center;
+        padding: 0 24px;
+      }
+      .hero-text h1 {
+        font-size: 48px;
+        line-height: 1.1;
+        margin-bottom: 32px;
+        font-weight: 800;
+        color: var(--dark);
+      }
+      .hero-text > p {
+        font-size: 18px;
+        line-height: 1.5;
+        color: var(--gray-700);
+        margin-bottom: 32px;
+        padding: 0;
+      }
+      .testimonials { display: none !important; }
+      .features { display: none; }
+      .brands { display: none; }
+      .hero-visual { display: none; }
+      .trust-badges { display: none; }
+      .cta { display: none; }
+      .mobile-features { display: none; }
+      .mobile-brands { display: none; }
+      .desktop-only { display: none !important; }
+      .hero-buttons {
+        flex-direction: column;
+        padding: 0;
+        margin-bottom: 48px;
+      }
+      .btn-hero-mobile {
+        background: linear-gradient(135deg, #A855F7 0%, #EC4899 100%);
+        color: white;
+        font-size: 22px;
+        font-weight: 800;
+        padding: 24px 32px;
+        min-height: 72px;
+        width: 100%;
+        border-radius: 24px;
+        box-shadow: 0 8px 24px rgba(168, 85, 247, 0.25);
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0;
+        text-decoration: none;
+      }
+      .btn-hero-mobile:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(168, 85, 247, 0.35);
+      }
+      .mobile-trust-points {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 24px;
+        padding: 0;
+        margin-top: 0;
+      }
+      .trust-point {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 16px;
+        color: var(--gray-700);
+        font-weight: 700;
+      }
+      .trust-point svg {
+        width: 20px;
+        height: 20px;
+        color: var(--secondary);
+        flex-shrink: 0;
+      }
+      .mobile-steps { display: block !important; padding: 0; text-align: left; }
+      .mobile-steps h2 {
+        font-size: 20px;
+        font-weight: 900;
+        color: var(--dark);
+        margin: 0 0 8px;
+        text-align: center;
+      }
+      .steps-card {
+        background: #fff;
+        border: 1px solid var(--gray-300);
+        border-radius: 16px;
+        padding: 14px 14px 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        margin-bottom: 14px;
+      }
+      .step-list { display: flex; flex-direction: column; gap: 12px; max-width: none; margin: 0; }
+      .step-item { display: flex; align-items: flex-start; gap: 12px; }
+      .step-number {
+        width: 36px; height: 36px;
+        background: linear-gradient(135deg, #A855F7 0%, #EC4899 100%);
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        color: #fff; font-size: 16px; font-weight: 900; flex-shrink: 0;
+      }
+      .step-content h3 { font-size: 16px; font-weight: 900; color: var(--dark); margin: 0 0 2px; }
+      .step-content p  { font-size: 14px; color: var(--gray-700); margin: 0; line-height: 1.35; }      
+      .step-content p {
+        font-size: 15px;
+        color: var(--gray-700);
+        margin: 0;
+        font-weight: 600;
+      }
+      .hero { padding: 84px 0 28px; }
+      .hero-text h1 { font-size: 40px; line-height: 1.05; margin-bottom: 18px; }
+      .hero-text > p { font-size: 16px; line-height: 1.45; color: var(--gray-700); margin-bottom: 18px; }
+      .hero-buttons { gap: 12px; margin-bottom: 24px; }
+      .btn-hero-mobile { font-size: 20px; min-height: 64px; padding: 18px 24px; border-radius: 20px; }
+    }
+    .mobile-testimonials,
+    .testimonial-rotator,
+    .testimonial-item,
+    .testimonial-avatar,
+    .testimonial-content,
+    .testimonial-name,
+    .testimonial-earning,
+    .testimonial-time,
+    .live-indicator,
+    .live-dot,
+    .live-text,
+    .live-count {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      overflow: hidden !important;
+    }
+    @media (min-width: 769px) {
+      .mobile-trust-points,
+      .mobile-steps { 
+        display: none !important;
+      }
+    }
+    @media (min-width: 769px) {
+      .btn-hero-mobile {
+        display: none;
+      }
+      body {
+        background: var(--dark);
+      }
+      header {
+        background: var(--gray-900);
+        border-bottom: 1px solid var(--gray-800);
+      }
+      .logo {
+        color: var(--white);
+      }
+      .hero {
+        background: linear-gradient(135deg, var(--dark) 0%, var(--gray-900) 100%);
+      }
+      h1, h2, h3 {
+        color: var(--white);
+      }
+      p {
+        color: var(--gray-300);
+      }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fade {
+      animation: fadeIn 0.6s ease-out;
+    }
+    .animate-slide {
+      animation: slideUp 0.6s ease-out;
+    }
+    @media (max-width: 768px) {
+      .desktop-only {
+        display: none !important;
+      }
+    }
+    :focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="/" class="logo">
+          <svg viewBox="0 0 100 100">
+            <rect fill="#A855F7" width="100" height="100" rx="20"/>
+            <path fill="white" d="M30 40h40v20H30z M25 45v10l10-5z M75 45v10l-10-5z"/>
+          </svg>
+          <span>Playful Rewards</span>
+        </a>
+        <nav>
+          <a href="#how">How it Works</a>
+          <a href="#brands">Brands</a>
+          <a href="#testimonials">Reviews</a>
+          <a href="/admin">Admin</a>
+        </nav>
+        <div class="mobile-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <main id="main">
+    
+      <!-- Mobile Live Players Bar - Shows only on mobile at the top -->
+      <section class="mobile-testimonials">
+        <div class="live-indicator">
+          <div class="live-dot"></div>
+          <span class="live-text"><span class="live-count">2,847</span> players earning right now</span>
+        </div>
+      </section>
+      
+      <section class="hero">
+        <div class="container">
+          <div class="hero-grid">
+            <div class="hero-text animate-fade">
+              <h1>Turn Gaming Into <span class="text-gradient">Real Money!</span></h1>
+  
+              <!-- Steps block (mobile): appears above the CTA) -->
+              <div class="mobile-steps steps-card" aria-label="Start earning in 4 simple steps">
+                <h2>Start Earning in 4 Simple Steps</h2>
+                <div class="step-list">
+                  <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                      <h3>Download</h3>
+                      <p>Tap the button below to download.</p>
+                    </div>
+                  </div>
+              
+                  <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                      <h3>Choose Activities</h3>
+                      <p>Pick from 100+ games — or just scroll TikTok to earn.</p>
+                    </div>
+                  </div>
+              
+                  <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                      <h3>Play &amp; Earn</h3>
+                      <p>Earn $10–50 per hour while gaming or browsing.</p>
+                    </div>
+                  </div>
+              
+                  <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                      <h3>Cash Out</h3>
+                      <p>Instant withdrawals to Cash App, PayPal, and more.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /Steps block -->
+  
+              <div class="hero-buttons">
+                <a href="https://www.phef6trk.com/KZDWFR/2JSKXKP/?sub1=opol" class="btn btn-hero-mobile">
+                  Start Earning Today
+                </a>
+                <a href="https://www.phef6trk.com/KZDWFR/2JSKXKP/?sub1=opol" class="btn btn-primary desktop-only">
+                  Start Earning Free
+                  <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"/>
+                  </svg>
+                </a>
+                <a href="#how" class="btn btn-secondary btn-large desktop-only">See How It Works</a>
+              </div>
+              
+              <!-- Mobile trust points -->
+              <div class="mobile-trust-points">
+                <div class="trust-point">
+                  <svg fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                  </svg>
+                  <span>Instant Payouts</span>
+                </div>
+                <div class="trust-point">
+                  <svg fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                  </svg>
+                  <span>No Fees</span>
+                </div>
+                <div class="trust-point">
+                  <svg fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                  </svg>
+                  <span>Verified Secure</span>
+                </div>
+              </div>
+              
+              <!-- Desktop trust badges -->
+              <div class="trust-badges">
+                <div class="trust-badge">
+                  <svg fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                    <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 1 1 0 000 2H6a2 2 0 100 4h2a2 2 0 100 4h2a1 1 0 100 2 2 2 0 01-2 2H4a2 2 0 01-2-2V7a2 2 0 012-2z"/>
+                  </svg>
+                  <span>No hidden fees</span>
+                </div>
+                <div class="trust-badge">
+                  <svg fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                  </svg>
+                  <span>50K+ active gamers</span>
+                </div>
+                <div class="trust-badge">
+                  <svg fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                  </svg>
+                  <span>Bank-level security</span>
+                </div>
+              </div>
+            </div>
+            <div class="hero-visual animate-slide">
+              <div class="hero-card">
+                <div class="points-display">
+                  <div class="points-value">0</div>
+                  <div class="points-label">Today's Earnings</div>
+                </div>
+                <div class="reward-item">
+                  <div class="reward-info">
+                    <div class="reward-icon">🎮</div>
+                    <div class="reward-details">
+                      <h4>Call of Duty Mobile</h4>
+                      <p>2 hours played</p>
+                    </div>
+                  </div>
+                  <div class="reward-points">+$12.50</div>
+                </div>
+                <div class="reward-item">
+                  <div class="reward-info">
+                    <div class="reward-icon">⚔️</div>
+                    <div class="reward-details">
+                      <h4>Clash Royale</h4>
+                      <p>Tournament win</p>
+                    </div>
+                  </div>
+                  <div class="reward-points">+$25.00</div>
+                </div>
+                <div class="reward-item">
+                  <div class="reward-info">
+                    <div class="reward-icon">🏎️</div>
+                    <div class="reward-details">
+                      <h4>Asphalt 9</h4>
+                      <p>Daily challenges</p>
+                    </div>
+                  </div>
+                  <div class="reward-points">+$8.75</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="features" id="how">
+        <div class="container">
+          <div class="features-intro">
+            <h2>How Playful Rewards Works</h2>
+            <p>Start earning in minutes. It's that simple.</p>
+          </div>
+          <div class="features-grid">
+            <div class="card feature-card">
+              <div class="feature-icon">1️⃣</div>
+              <h3>Sign Up Free</h3>
+              <p>Create your account in seconds. No credit card required, no monthly fees, ever.</p>
+            </div>
+            <div class="card feature-card">
+              <div class="feature-icon">2️⃣</div>
+              <h3>Shop Normally</h3>
+              <p>Browse and shop at your favorite stores. We'll automatically track and add points to your account.</p>
+            </div>
+            <div class="card feature-card">
+              <div class="feature-icon">3️⃣</div>
+              <h3>Earn Rewards</h3>
+              <p>Redeem points for cash back, gift cards, travel miles, or donate to charity. Your choice.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="brands" id="brands">
+        <div class="container">
+          <div class="brands-intro">
+            <h2>5,000+ Partner Brands</h2>
+            <p>Earn rewards at the places you already shop</p>
+          </div>
+          <div class="brands-grid">
+            <div class="brand-card">
+              <div class="brand-logo">🛍️</div>
+              <p class="brand-name">Amazon</p>
+              <p class="brand-cashback">3% back</p>
+            </div>
+            <div class="brand-card">
+              <div class="brand-logo">🎯</div>
+              <p class="brand-name">Target</p>
+              <p class="brand-cashback">2% back</p>
+            </div>
+            <div class="brand-card">
+              <div class="brand-logo">🏪</div>
+              <p class="brand-name">Walmart</p>
+              <p class="brand-cashback">3.5% back</p>
+            </div>
+            <div class="brand-card">
+              <div class="brand-logo">👟</div>
+              <p class="brand-name">Nike</p>
+              <p class="brand-cashback">8% back</p>
+            </div>
+            <div class="brand-card">
+              <div class="brand-logo">🍎</div>
+              <p class="brand-name">Apple</p>
+              <p class="brand-cashback">2% back</p>
+            </div>
+            <div class="brand-card">
+              <div class="brand-logo">🏠</div>
+              <p class="brand-name">Home Depot</p>
+              <p class="brand-cashback">4% back</p>
+            </div>
+            <div class="brand-card">
+              <div class="brand-logo">💄</div>
+              <p class="brand-name">Sephora</p>
+              <p class="brand-cashback">6% back</p>
+            </div>
+            <div class="brand-card">
+              <div class="brand-logo">🍕</div>
+              <p class="brand-name">DoorDash</p>
+              <p class="brand-cashback">5% back</p>
+            </div>
+            <div class="brand-card">
+              <div class="brand-logo">✈️</div>
+              <p class="brand-name">Expedia</p>
+              <p class="brand-cashback">10% back</p>
+            </div>
+            <div class="brand-card">
+              <div class="brand-logo">🎮</div>
+              <p class="brand-name">Best Buy</p>
+              <p class="brand-cashback">3% back</p>
+            </div>
+            <div class="brand-card">
+              <div class="brand-logo">☕</div>
+              <p class="brand-name">Starbucks</p>
+              <p class="brand-cashback">7% back</p>
+            </div>
+            <div class="brand-card">
+              <div class="brand-logo">🎬</div>
+              <p class="brand-name">Netflix</p>
+              <p class="brand-cashback">4% back</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="testimonials" id="testimonials">
+        <div class="container">
+          <div class="testimonials-intro">
+            <h2>Real People, Real Rewards</h2>
+            <p>Join millions earning rewards every day</p>
+          </div>
+          <div class="testimonials-scroll">
+            <div class="testimonials-track">
+              <div class="testimonial-card">
+                <div class="testimonial-header">
+                  <div class="testimonial-avatar">SK</div>
+                  <div class="testimonial-info">
+                    <h4>Sarah Kim</h4>
+                    <p>Member since 2022</p>
+                  </div>
+                </div>
+                <div class="testimonial-rating">★★★★★</div>
+                <p class="testimonial-text">"I've earned over $2,000 in cashback just from my regular shopping. The browser extension makes it automatic - I don't even have to think about it!"</p>
+                <div class="testimonial-reward">
+                  <span class="testimonial-reward-label">Total earned</span>
+                  <span class="testimonial-reward-value">$2,347</span>
+                </div>
+              </div>
+              <div class="testimonial-card">
+                <div class="testimonial-header">
+                  <div class="testimonial-avatar">MJ</div>
+                  <div class="testimonial-info">
+                    <h4>Marcus Johnson</h4>
+                    <p>Member since 2023</p>
+                  </div>
+                </div>
+                <div class="testimonial-rating">★★★★★</div>
+                <p class="testimonial-text">"Used my points for a free flight to Hawaii! The travel rewards are incredible, especially when booking hotels and rental cars."</p>
+                <div class="testimonial-reward">
+                  <span class="testimonial-reward-label">Total earned</span>
+                  <span class="testimonial-reward-value">$1,892</span>
+                </div>
+              </div>
+              <div class="testimonial-card">
+                <div class="testimonial-header">
+                  <div class="testimonial-avatar">EP</div>
+                  <div class="testimonial-info">
+                    <h4>Emily Parker</h4>
+                    <p>Member since 2021</p>
+                  </div>
+                </div>
+                <div class="testimonial-rating">★★★★★</div>
+                <p class="testimonial-text">"As a mom of three, I shop online a lot. Playful Rewards has literally paid for our Christmas presents two years in a row!"</p>
+                <div class="testimonial-reward">
+                  <span class="testimonial-reward-label">Total earned</span>
+                  <span class="testimonial-reward-value">$3,156</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="cta">
+        <div class="container">
+          <div class="cta-content">
+            <h2>Start Earning Rewards Today</h2>
+            <p>Join 2 million+ members saving money on every purchase</p>
+            <a href="https://www.phef6trk.com/KZDWFR/2JSKXKP/?sub1=opol" class="btn btn-large">Get Started Free →</a>
+          </div>
+        </div>
+      </section>
+    
+  </main>
+  
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3>
+            <svg width="32" height="32" viewBox="0 0 100 100">
+              <rect fill="#6366F1" width="100" height="100" rx="20"/>
+              <path fill="white" d="M50 25l15 15v20l-15 15-15-15V40z"/>
+            </svg>
+            Playful Rewards
+          </h3>
+          <p>Turn every purchase into rewards. Shop smarter, earn faster, and unlock exclusive perks at thousands of brands.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Product</h4>
+          <div class="footer-links">
+            <a href="#how">How it Works</a>
+            <a href="#brands">Partner Brands</a>
+            <a href="#">Mobile App</a>
+            <a href="#">Browser Extension</a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Company</h4>
+          <div class="footer-links">
+            <a href="#">About Us</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+            <a href="#">Blog</a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Support</h4>
+          <div class="footer-links">
+            <a href="/contact">Contact</a>
+            <a href="#">Help Center</a>
+            <a href="/terms">Terms</a>
+            <a href="/privacy">Privacy</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Playful Rewards. All rights reserved.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Twitter">𝕏</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="Instagram">📷</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+    
+    function animateValue(element, start, end, duration) {
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        element.textContent = Math.floor(progress * (end - start) + start).toLocaleString();
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const pointsElement = entry.target.querySelector('.points-value');
+          if (pointsElement && !pointsElement.animated) {
+            pointsElement.animated = true;
+            animateValue(pointsElement, 0, 12847, 2000);
+          }
+        }
+      });
+    });
+    
+    const pointsDisplay = document.querySelector('.points-display');
+    if (pointsDisplay) {
+      observer.observe(pointsDisplay);
+    }
+    
+    function track(event, data) {
+      fetch('/analytics', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ event, data, timestamp: Date.now() })
+      }).catch(() => {});
+    }
+    
+    track('pageview', { path: window.location.pathname });
+    
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        track('cta_click', { text: btn.textContent.trim() });
+      });
+    });
+  </script>
+  
+</body>
+</html>
